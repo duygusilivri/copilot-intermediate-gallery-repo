@@ -2,6 +2,7 @@ import { Users, Plus, Eye, Edit, Trash2, Settings } from "lucide-react";
 import Link from "next/link";
 import { Hero, SectionContainer, SectionTitle, FeatureCard, StatsGrid } from "@/components/ui";
 import { dashboardStats, recentGalleries } from "@/lib/mock-admin-data";
+import { sanitizeText } from "@/lib/sanitize";
 
 export default function AdminPage() {
   return (
@@ -78,7 +79,7 @@ export default function AdminPage() {
                   <tr key={gallery.id} className="table-row">
                     <td className="py-4 px-6">
                       <div className="font-medium text-slate-900 dark:text-white">
-                        {gallery.name}
+                        {sanitizeText(gallery.name)}
                       </div>
                     </td>
                     <td className="py-4 px-6">

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Heart, Download, Share2, Eye, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Photo, mockPhotos } from '@/lib/mock-photo-data';
+import { sanitizeText } from '@/lib/sanitize';
 
 interface GalleryGridProps {
   limit?: number;
@@ -27,17 +28,21 @@ export function GalleryGrid({
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [likedPhotos, setLikedPhotos] = useState<Set<string>>(new Set());
 
-  // Filter photos based on selected tags and search query
+  // Filter photos based on selected tags and search query with sanitization
   const filteredPhotos = mockPhotos.filter(photo => {
+    // Sanitize inputs before filtering
+    const sanitizedSearchQuery = searchQuery.toLowerCase().trim();
+    const sanitizedTags = selectedTags.map(tag => tag.toLowerCase().trim());
+    
     // Filter by tags
-    const matchesTags = selectedTags.length === 0 || 
-      selectedTags.some(tag => photo.tags.includes(tag.toLowerCase()));
+    const matchesTags = sanitizedTags.length === 0 || 
+      sanitizedTags.some(tag => photo.tags.includes(tag));
     
     // Filter by search query
-    const matchesSearch = searchQuery === "" ||
-      photo.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      photo.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (photo.photographer && photo.photographer.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesSearch = sanitizedSearchQuery === "" ||
+      photo.title.toLowerCase().includes(sanitizedSearchQuery) ||
+      photo.tags.some(tag => tag.toLowerCase().includes(sanitizedSearchQuery)) ||
+      (photo.photographer && photo.photographer.toLowerCase().includes(sanitizedSearchQuery));
     
     return matchesTags && matchesSearch;
   });
@@ -125,7 +130,7 @@ export function GalleryGrid({
             {/* Photo Info */}
             <div className="p-4">
               <h3 className="font-semibold text-slate-900 dark:text-white mb-2 truncate">
-                {photo.title}
+                {sanitizeText(photo.title)}
               </h3>
               
               {/* Tags */}
@@ -136,7 +141,7 @@ export function GalleryGrid({
                     className="inline-flex items-center gap-1 px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs rounded-full"
                   >
                     <Tag className="h-3 w-3" />
-                    {tag}
+                    {sanitizeText(tag)}
                   </span>
                 ))}
                 {photo.tags.length > 3 && (
@@ -167,7 +172,7 @@ export function GalleryGrid({
               {/* Photographer */}
               {photo.photographer && (
                 <div className="mt-2 text-sm text-slate-600 dark:text-slate-400">
-                  by {photo.photographer}
+                  by {sanitizeText(photo.photographer)}
                 </div>
               )}
             </div>
@@ -215,7 +220,7 @@ export function GalleryGrid({
           <div className="bg-white dark:bg-slate-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold">{selectedPhoto.title}</h2>
+                <h2 className="text-2xl font-bold">{sanitizeText(selectedPhoto.title)}</h2>
                 <button
                   onClick={() => setSelectedPhoto(null)}
                   className="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
@@ -226,6 +231,11 @@ export function GalleryGrid({
               <p className="text-slate-600 dark:text-slate-400">
                 Photo details and larger view would be implemented here.
               </p>
+              {selectedPhoto.photographer && (
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+                  Photographer: {sanitizeText(selectedPhoto.photographer)}
+                </p>
+              )}
             </div>
           </div>
         </div>
