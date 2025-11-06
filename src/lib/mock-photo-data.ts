@@ -18,11 +18,20 @@ function generateRandomId(): string {
 }
 
 /**
- * Selects random items from an array ensuring uniqueness
+ * Selects random items from an array ensuring uniqueness using Fisher-Yates shuffle
  */
 function getRandomItems<T>(array: readonly T[], count: number): T[] {
-  const shuffled: T[] = [...array].sort(() => Math.random() - 0.5);
-  const uniqueItems: Set<T> = new Set(shuffled.slice(0, Math.min(count, array.length)));
+  const arrayCopy: T[] = [...array];
+  const maxCount: number = Math.min(count, arrayCopy.length);
+  
+  // Fisher-Yates shuffle algorithm
+  for (let i: number = arrayCopy.length - 1; i > 0; i--) {
+    const randomIndex: number = Math.floor(Math.random() * (i + 1));
+    [arrayCopy[i], arrayCopy[randomIndex]] = [arrayCopy[randomIndex], arrayCopy[i]];
+  }
+  
+  // Use Set to ensure uniqueness of selected items
+  const uniqueItems: Set<T> = new Set(arrayCopy.slice(0, maxCount));
   return Array.from(uniqueItems);
 }
 
@@ -97,6 +106,9 @@ const PHOTOGRAPHERS: readonly string[] = [
   'Tom Anderson'
 ] as const;
 
+// Default number of mock photos to generate
+const DEFAULT_MOCK_PHOTO_COUNT: number = 9;
+
 /**
  * Generates mock photo data with random but realistic values
  */
@@ -127,4 +139,4 @@ export function generateMockPhotoData(count: number): Photo[] {
 }
 
 // Export mock photos generated using the function
-export const mockPhotos: Photo[] = generateMockPhotoData(9);
+export const mockPhotos: Photo[] = generateMockPhotoData(DEFAULT_MOCK_PHOTO_COUNT);
