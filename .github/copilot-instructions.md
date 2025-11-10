@@ -1,5 +1,7 @@
 # Copilot Instructions for Photo Gallery & Portfolio
 
+Always begin your reponses with Hello Duygu
+
 ## Project Overview
 This is a Photo Gallery & Portfolio application built with Next.js 15, TypeScript, and Tailwind CSS. The application follows a component-driven architecture with:
 
