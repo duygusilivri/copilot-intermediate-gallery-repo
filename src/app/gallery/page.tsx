@@ -5,6 +5,7 @@ import { Search, Filter, Grid, List, ChevronDown, X } from "lucide-react";
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { Hero, SectionContainer, SectionTitle } from "@/components/ui";
 import { AVAILABLE_TAGS } from "@/lib/mock-tag-data";
+import { sanitizeSearchQuery, sanitizeText } from "@/lib/sanitize";
 
 export default function GalleryPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,10 +40,14 @@ export default function GalleryPage() {
   };
 
   const toggleTag = (tag: string) => {
+    // Sanitize tag input before adding to filters
+    const sanitizedTag = sanitizeText(tag);
+    if (!sanitizedTag) return;
+    
     setSelectedTags(prev => 
-      prev.includes(tag) 
-        ? prev.filter(t => t !== tag)
-        : [...prev, tag]
+      prev.includes(sanitizedTag) 
+        ? prev.filter(t => t !== sanitizedTag)
+        : [...prev, sanitizedTag]
     );
     // Reset to first page when filters change
     setCurrentPage(1);
@@ -53,9 +58,10 @@ export default function GalleryPage() {
     setCurrentPage(1);
   };
 
-  // Reset page when search changes
+  // Reset page when search changes with sanitization
   const handleSearchChange = (query: string) => {
-    setSearchQuery(query);
+    const sanitizedQuery = sanitizeSearchQuery(query);
+    setSearchQuery(sanitizedQuery);
     setCurrentPage(1);
   };
   return (

@@ -2,15 +2,18 @@
 
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Upload, X, Image as ImageIcon, CheckCircle } from 'lucide-react';
+import { Upload, X, Image as ImageIcon, CheckCircle, AlertTriangle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { validateFileUpload, sanitizeFileName } from '@/lib/sanitize';
 
 interface UploadedFile {
   id: string;
   file: File;
+  sanitizedName: string;
   preview: string;
   status: 'uploading' | 'success' | 'error';
   progress: number;
+  errors: string[];
 }
 
 interface UploadZoneProps {
@@ -23,22 +26,31 @@ export function UploadZone({ onUpload, maxFiles = 10, className = "" }: UploadZo
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    const newFiles = acceptedFiles.map(file => ({
-      id: Math.random().toString(36).substring(2),
-      file,
-      preview: URL.createObjectURL(file),
-      status: 'uploading' as const,
-      progress: 0,
-    }));
+    const newFiles = acceptedFiles.map(file => {
+      const validation = validateFileUpload(file);
+      
+      return {
+        id: Math.random().toString(36).substring(2),
+        file,
+        sanitizedName: validation.sanitizedName,
+        preview: URL.createObjectURL(file),
+        status: validation.isValid ? 'uploading' as const : 'error' as const,
+        progress: 0,
+        errors: validation.errors,
+      };
+    });
 
     setUploadedFiles(prev => [...prev, ...newFiles]);
 
-    // Simulate upload progress
-    newFiles.forEach(fileObj => {
+    // Only process valid files
+    const validFiles = newFiles.filter(fileObj => fileObj.status === 'uploading');
+
+    // Simulate upload progress for valid files
+    validFiles.forEach(fileObj => {
       const interval = setInterval(() => {
         setUploadedFiles(prev => 
           prev.map(f => 
-            f.id === fileObj.id 
+            f.id === fileObj.id && f.status === 'uploading'
               ? { ...f, progress: Math.min(f.progress + 10, 100) }
               : f
           )
@@ -49,7 +61,7 @@ export function UploadZone({ onUpload, maxFiles = 10, className = "" }: UploadZo
         clearInterval(interval);
         setUploadedFiles(prev => 
           prev.map(f => 
-            f.id === fileObj.id 
+            f.id === fileObj.id && f.status === 'uploading'
               ? { ...f, status: 'success', progress: 100 }
               : f
           )
@@ -57,7 +69,10 @@ export function UploadZone({ onUpload, maxFiles = 10, className = "" }: UploadZo
       }, 2000);
     });
 
-    onUpload?.(acceptedFiles);
+    // Only call onUpload with valid files
+    if (validFiles.length > 0) {
+      onUpload?.(validFiles.map(f => f.file));
+    }
   }, [onUpload]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -152,12 +167,24 @@ export function UploadZone({ onUpload, maxFiles = 10, className = "" }: UploadZo
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium truncate">
-                        {fileObj.file.name}
+                        {fileObj.sanitizedName || fileObj.file.name}
                       </span>
                       <span className="text-xs text-slate-500">
                         {(fileObj.file.size / 1024 / 1024).toFixed(1)}MB
                       </span>
                     </div>
+                    
+                    {/* Show validation errors */}
+                    {fileObj.errors.length > 0 && (
+                      <div className="space-y-1">
+                        {fileObj.errors.map((error, errorIndex) => (
+                          <div key={errorIndex} className="flex items-center gap-2 text-red-600 text-xs">
+                            <AlertTriangle className="h-3 w-3" />
+                            <span>{error}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                     
                     {fileObj.status === 'uploading' && (
                       <div className="progress-bar">
@@ -174,6 +201,13 @@ export function UploadZone({ onUpload, maxFiles = 10, className = "" }: UploadZo
                       <div className="flex items-center gap-2 text-green-600 text-sm">
                         <CheckCircle className="h-4 w-4" />
                         <span>Upload complete</span>
+                      </div>
+                    )}
+
+                    {fileObj.status === 'error' && (
+                      <div className="flex items-center gap-2 text-red-600 text-sm">
+                        <AlertTriangle className="h-4 w-4" />
+                        <span>Upload failed</span>
                       </div>
                     )}
                   </div>
