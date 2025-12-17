@@ -18,9 +18,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   // Initialize theme from localStorage
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme && ['light', 'dark', 'auto'].includes(savedTheme)) {
-      setThemeState(savedTheme);
+    try {
+      const savedTheme = localStorage.getItem('theme') as Theme | null;
+      if (savedTheme && ['light', 'dark', 'auto'].includes(savedTheme)) {
+        setThemeState(savedTheme);
+      }
+    } catch (error) {
+      // localStorage might not be available in some contexts
+      console.error('Failed to load theme preference:', error);
     }
   }, []);
 
@@ -60,7 +65,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
-    localStorage.setItem('theme', newTheme);
+    try {
+      localStorage.setItem('theme', newTheme);
+    } catch (error) {
+      // localStorage might not be available in some contexts
+      console.error('Failed to save theme preference:', error);
+    }
   };
 
   return (
