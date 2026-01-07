@@ -10,6 +10,8 @@ export function ThemeToggle() {
 
   // Check for prefers-reduced-motion
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setIsReducedMotion(mediaQuery.matches);
 

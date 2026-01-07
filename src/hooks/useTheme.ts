@@ -1,25 +1,17 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import { Theme, getEffectiveTheme as getResolvedTheme } from '@/utils/theme';
 
-export type Theme = 'light' | 'dark' | 'system';
+export type { Theme } from '@/utils/theme';
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>('system');
   const [mounted, setMounted] = useState(false);
 
-  // Get system preference
-  const getSystemTheme = (): 'light' | 'dark' => {
-    if (typeof window === 'undefined') return 'light';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  };
-
   // Get effective theme (resolves 'system' to actual theme)
   const getEffectiveTheme = useCallback((currentTheme: Theme): 'light' | 'dark' => {
-    if (currentTheme === 'system') {
-      return getSystemTheme();
-    }
-    return currentTheme;
+    return getResolvedTheme(currentTheme);
   }, []);
 
   // Apply theme to document
@@ -51,7 +43,7 @@ export function useTheme() {
 
   // Listen for system theme changes
   useEffect(() => {
-    if (theme !== 'system') return;
+    if (theme !== 'system' || typeof window === 'undefined') return;
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {

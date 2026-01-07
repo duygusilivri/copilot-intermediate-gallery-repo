@@ -1,26 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
-
+/**
+ * ThemeProvider component that wraps the application.
+ * The actual theme initialization is handled by:
+ * 1. Blocking script in layout.tsx (prevents FOUC)
+ * 2. useTheme hook (for runtime theme management)
+ * 
+ * This component exists primarily as a client-side wrapper
+ * for any future theme-related context or functionality.
+ */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    // This runs on mount to initialize theme from localStorage
-    const savedTheme = localStorage.getItem('theme') || 'system';
-    
-    const getSystemTheme = () => {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-
-    const effectiveTheme = savedTheme === 'system' ? getSystemTheme() : savedTheme;
-    const root = document.documentElement;
-
-    root.setAttribute('data-theme', effectiveTheme);
-    if (effectiveTheme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-  }, []);
-
   return <>{children}</>;
 }

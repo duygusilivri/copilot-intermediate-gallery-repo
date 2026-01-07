@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Camera } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { getThemeScript } from "@/utils/theme";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,22 +27,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const savedTheme = localStorage.getItem('theme') || 'system';
-                  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                  const effectiveTheme = savedTheme === 'system' ? systemTheme : savedTheme;
-                  const root = document.documentElement;
-                  root.setAttribute('data-theme', effectiveTheme);
-                  if (effectiveTheme === 'dark') {
-                    root.classList.add('dark');
-                  } else {
-                    root.classList.remove('dark');
-                  }
-                } catch (e) {}
-              })();
-            `,
+            __html: getThemeScript(),
           }}
         />
       </head>
