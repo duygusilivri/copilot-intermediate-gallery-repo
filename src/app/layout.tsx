@@ -49,7 +49,22 @@ export default function RootLayout({
           </div>
         </header>
         {children}
-        {/* REPLACE THIS COMMENT */}
+        {/* create a header for this page. Include logo and copyright information/}
+        <footer className="border-t mt-12 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
+          <div className="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm text-slate-600 dark:text-slate-400">  
+              &copy; {new Date().getFullYear()} Portfolio Gallery. All rights reserved.
+            </p>
+            <div className="flex items-center gap-4 mt-4 md:mt-0">  
+              <Link href="/privacy" className="text-sm text-slate-600 dark:text-slate-400 hover:underline">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-sm text-slate-600 dark:text-slate-400 hover:underline">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
