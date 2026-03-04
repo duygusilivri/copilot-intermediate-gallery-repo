@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -9,11 +11,9 @@
   --font-sans: var(--font-geist-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 body {
@@ -27,11 +27,10 @@ body {
   background: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
 }
 
-@media (prefers-color-scheme: dark) {
-  .page-gradient {
-    background: linear-gradient(to bottom right, #0f172a, #1e293b);
-  }
+.dark .page-gradient {
+  background: linear-gradient(to bottom right, #0f172a, #1e293b);
 }
+
 
 /* ==========================================================================
    UI Component Patterns - Standard CSS for compatibility
@@ -44,11 +43,10 @@ body {
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card-base {
-    background-color: #1e293b;
-  }
+.dark .card-base {
+  background-color: #1e293b;
 }
+
 
 .card-elevated {
   background-color: #ffffff;
@@ -61,11 +59,10 @@ body {
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card-elevated {
-    background-color: #1e293b;
-  }
+.dark .card-elevated {
+  background-color: #1e293b;
 }
+
 
 .card-feature {
   background-color: #ffffff;
@@ -74,11 +71,10 @@ body {
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card-feature {
-    background-color: #1e293b;
-  }
+.dark .card-feature {
+  background-color: #1e293b;
 }
+
 
 .card-stats {
   background-color: #ffffff;
@@ -87,11 +83,10 @@ body {
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card-stats {
-    background-color: #1e293b;
-  }
+.dark .card-stats {
+  background-color: #1e293b;
 }
+
 
 /* Button Patterns */
 .btn-primary {
@@ -124,16 +119,15 @@ body {
   background-color: #f9fafb;
 }
 
-@media (prefers-color-scheme: dark) {
-  .btn-secondary {
-    border-color: #4b5563;
-    color: #d1d5db;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #374151;
-  }
+.dark .btn-secondary {
+  border-color: #4b5563;
+  color: #d1d5db;
 }
+
+.dark .btn-secondary:hover {
+  background-color: #374151;
+}
+
 
 .btn-icon {
   padding: 0.25rem;
@@ -168,15 +162,14 @@ body {
   color: #111827;
 }
 
-@media (prefers-color-scheme: dark) {
-  .nav-link {
-    color: #d1d5db;
-  }
-  
-  .nav-link:hover {
-    color: #ffffff;
-  }
+.dark .nav-link {
+  color: #d1d5db;
 }
+
+.dark .nav-link:hover {
+  color: #ffffff;
+}
+
 
 .nav-link-active {
   color: #2563eb;
@@ -211,18 +204,17 @@ body {
   border-color: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  .form-input,
-  .form-select {
-    border-color: #4b5563;
-    background-color: #374151;
-    color: #ffffff;
-  }
-  
-  .form-input::placeholder {
-    color: #9ca3af;
-  }
+.dark .form-input,
+.dark .form-select {
+  border-color: #4b5563;
+  background-color: #374151;
+  color: #ffffff;
 }
+
+.dark .form-input::placeholder {
+  color: #9ca3af;
+}
+
 
 /* Status Elements */
 .status-badge {
@@ -249,22 +241,21 @@ body {
   color: #9a3412;
 }
 
-@media (prefers-color-scheme: dark) {
-  .status-active {
-    background-color: #14532d;
-    color: #bbf7d0;
-  }
-  
-  .status-private {
-    background-color: #581c87;
-    color: #e9d5ff;
-  }
-  
-  .status-draft {
-    background-color: #9a3412;
-    color: #fed7aa;
-  }
+.dark .status-active {
+  background-color: #14532d;
+  color: #bbf7d0;
 }
+
+.dark .status-private {
+  background-color: #581c87;
+  color: #e9d5ff;
+}
+
+.dark .status-draft {
+  background-color: #9a3412;
+  color: #fed7aa;
+}
+
 
 /* Color System Classes */
 .icon-blue { color: #2563eb; }
@@ -314,12 +305,11 @@ body {
   background-color: #fed7aa;
 }
 
-@media (prefers-color-scheme: dark) {
-  .icon-container-blue { background-color: #1e3a8a; }
-  .icon-container-green { background-color: #14532d; }
-  .icon-container-purple { background-color: #581c87; }
-  .icon-container-orange { background-color: #9a3412; }
-}
+.dark .icon-container-blue { background-color: #1e3a8a; }
+.dark .icon-container-green { background-color: #14532d; }
+.dark .icon-container-purple { background-color: #581c87; }
+.dark .icon-container-orange { background-color: #9a3412; }
+
 
 /* Hover Patterns */
 .hover-lift {
@@ -342,11 +332,10 @@ body {
   background-color: #f9fafb;
 }
 
-@media (prefers-color-scheme: dark) {
-  .hover-bg:hover {
-    background-color: rgba(55, 65, 81, 0.5);
-  }
+.dark .hover-bg:hover {
+  background-color: rgba(55, 65, 81, 0.5);
 }
+
 
 /* Progress Bar */
 .progress-bar {
@@ -363,11 +352,10 @@ body {
   transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .progress-bar {
-    background-color: #374151;
-  }
+.dark .progress-bar {
+  background-color: #374151;
 }
+
 
 /* Drag and Drop */
 .drop-zone {
@@ -388,19 +376,18 @@ body {
   border-color: #60a5fa;
 }
 
-@media (prefers-color-scheme: dark) {
-  .drop-zone {
-    border-color: #4b5563;
-  }
-  
-  .drop-zone-active {
-    background-color: rgba(59, 130, 246, 0.1);
-  }
-  
-  .drop-zone-inactive:hover {
-    border-color: #3b82f6;
-  }
+.dark .drop-zone {
+  border-color: #4b5563;
 }
+
+.dark .drop-zone-active {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.dark .drop-zone-inactive:hover {
+  border-color: #3b82f6;
+}
+
 
 /* Table Patterns */
 .table-row {
@@ -412,15 +399,14 @@ body {
   background-color: #f9fafb;
 }
 
-@media (prefers-color-scheme: dark) {
-  .table-row {
-    border-color: #374151;
-  }
-  
-  .table-row:hover {
-    background-color: rgba(55, 65, 81, 0.5);
-  }
+.dark .table-row {
+  border-color: #374151;
 }
+
+.dark .table-row:hover {
+  background-color: rgba(55, 65, 81, 0.5);
+}
+
 
 /* Additional Button Variations */
 .btn-primary.flex-1 {
@@ -451,8 +437,7 @@ body {
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .gallery-card {
-    background-color: #1e293b;
-  }
+.dark .gallery-card {
+  background-color: #1e293b;
 }
+
