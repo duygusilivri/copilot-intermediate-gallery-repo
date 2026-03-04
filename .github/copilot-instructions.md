@@ -1,5 +1,36 @@
 # Copilot Instructions for Photo Gallery & Portfolio
 
+## About This File
+
+This file is the **repository-wide custom instructions** file for GitHub Copilot. It is located at `.github/copilot-instructions.md` and is automatically loaded by GitHub Copilot in every chat session within this repository. You do not need to reference or attach it manually — Copilot reads it as background context for all requests.
+
+Use this file to document project conventions, architecture decisions, and coding patterns so that Copilot's suggestions stay consistent with the rest of the codebase.
+
+### Referencing Other Instruction Files
+
+Yes — you can reference other instruction files from this file. GitHub Copilot supports three complementary mechanisms:
+
+1. **Prompt files** (`.github/prompts/*.prompt.md`) — Reusable, task-specific prompts that you can invoke with the `/` slash-command menu in Copilot Chat. They can optionally include a `mode` and `tools` frontmatter. Copilot reads these when they are invoked but does not include them automatically in every session.
+
+2. **Chat mode files** (`.github/chatmodes/*.chatmode.md`) — Custom chat modes that change how Copilot behaves (e.g., planning-only mode). Select a mode from the chat mode picker in VS Code.
+
+3. **Inline `#file:` references** — Inside any Copilot Chat message or inside a `.prompt.md` file you can attach a file as additional context with the syntax:
+   ```
+   #file:.github/prompts/generate-new-ui.prompt.md
+   ```
+   Copilot will read the referenced file's contents as part of that specific request.
+
+#### Files in This Repository
+
+| File | Purpose | How to Use |
+|------|---------|------------|
+| [prompts/generate-new-ui.prompt.md](./prompts/generate-new-ui.prompt.md) | Scaffold a new UI component following project patterns | Run `/generate-new-ui` in Copilot Chat |
+| [prompts/generate-mock-photo-data.prompt.md](./prompts/generate-mock-photo-data.prompt.md) | Generate additional mock photo data entries | Run `/generate-mock-photo-data` in Copilot Chat |
+| [prompts/create-copilot-demo.prompt.md](./prompts/create-copilot-demo.prompt.md) | Create a new GitHub Copilot demo file | Run `/create-copilot-demo` in Copilot Chat |
+| [chatmodes/Plan.chatmode.md](./chatmodes/Plan.chatmode.md) | Planning mode — generates implementation plans without making code edits | Select **Plan** from the chat mode picker |
+
+---
+
 ## Project Overview
 This is a Photo Gallery & Portfolio application built with Next.js 15, TypeScript, and Tailwind CSS. The application follows a component-driven architecture with:
 
