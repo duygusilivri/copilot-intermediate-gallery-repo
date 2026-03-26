@@ -1,11 +1,10 @@
 @import "tailwindcss";
 
-@theme {
-  /* 1. Force class-based dark mode for ALL dark: utilities */
-  --variant-dark: .dark &;
+@custom-variant dark (&:where(.dark, .dark *));
 
-  /* 2. Custom Fonts */
+@theme {
   --font-sans: var(--font-geist-sans);
+  /* You can remove --variant-dark from here now */
 }
 
 :root {
