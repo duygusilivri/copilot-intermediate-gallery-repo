@@ -4,7 +4,6 @@
 
 @theme {
   --font-sans: var(--font-geist-sans);
-  /* You can remove --variant-dark from here now */
 }
 
 :root {
