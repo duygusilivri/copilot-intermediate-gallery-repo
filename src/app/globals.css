@@ -1,19 +1,22 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
-  --font-sans: var(--font-geist-sans);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
+
+
+.dark {
     --background: #0a0a0a;
     --foreground: #ededed;
-  }
 }
 
 body {
@@ -27,10 +30,8 @@ body {
   background: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
 }
 
-@media (prefers-color-scheme: dark) {
-  .page-gradient {
+.dark .page-gradient {
     background: linear-gradient(to bottom right, #0f172a, #1e293b);
-  }
 }
 
 /* ==========================================================================
@@ -44,10 +45,8 @@ body {
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card-base {
+.dark .card-base {
     background-color: #1e293b;
-  }
 }
 
 .card-elevated {
@@ -61,11 +60,10 @@ body {
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card-elevated {
+.dark .card-elevated {
     background-color: #1e293b;
-  }
 }
+
 
 .card-feature {
   background-color: #ffffff;
@@ -74,10 +72,8 @@ body {
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card-feature {
+.dark .card-feature {
     background-color: #1e293b;
-  }
 }
 
 .card-stats {
@@ -87,10 +83,8 @@ body {
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card-stats {
+.dark .card-stats {
     background-color: #1e293b;
-  }
 }
 
 /* Button Patterns */
@@ -124,16 +118,15 @@ body {
   background-color: #f9fafb;
 }
 
-@media (prefers-color-scheme: dark) {
-  .btn-secondary {
+.dark .btn-secondary {
     border-color: #4b5563;
     color: #d1d5db;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #374151;
-  }
 }
+  
+.dark .btn-secondary:hover {
+    background-color: #374151;
+}
+
 
 .btn-icon {
   padding: 0.25rem;
@@ -168,14 +161,12 @@ body {
   color: #111827;
 }
 
-@media (prefers-color-scheme: dark) {
-  .nav-link {
+.dark .nav-link {
     color: #d1d5db;
-  }
+}
   
-  .nav-link:hover {
+.dark .nav-link:hover {
     color: #ffffff;
-  }
 }
 
 .nav-link-active {
@@ -211,17 +202,16 @@ body {
   border-color: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
+.dark 
   .form-input,
   .form-select {
     border-color: #4b5563;
     background-color: #374151;
     color: #ffffff;
-  }
+}
   
-  .form-input::placeholder {
+.dark .form-input::placeholder {
     color: #9ca3af;
-  }
 }
 
 /* Status Elements */
@@ -249,23 +239,22 @@ body {
   color: #9a3412;
 }
 
-@media (prefers-color-scheme: dark) {
+.dark { 
   .status-active {
     background-color: #14532d;
     color: #bbf7d0;
   }
   
   .status-private {
-    background-color: #581c87;
-    color: #e9d5ff;
-  }
-  
+      background-color: #581c87;
+      color: #e9d5ff;
+    }
+
   .status-draft {
-    background-color: #9a3412;
-    color: #fed7aa;
+      background-color: #9a3412;
+      color: #fed7aa;
   }
 }
-
 /* Color System Classes */
 .icon-blue { color: #2563eb; }
 .icon-green { color: #16a34a; }
@@ -314,7 +303,7 @@ body {
   background-color: #fed7aa;
 }
 
-@media (prefers-color-scheme: dark) {
+.dark {
   .icon-container-blue { background-color: #1e3a8a; }
   .icon-container-green { background-color: #14532d; }
   .icon-container-purple { background-color: #581c87; }
@@ -342,10 +331,8 @@ body {
   background-color: #f9fafb;
 }
 
-@media (prefers-color-scheme: dark) {
-  .hover-bg:hover {
+.dark .hover-bg:hover {
     background-color: rgba(55, 65, 81, 0.5);
-  }
 }
 
 /* Progress Bar */
@@ -363,10 +350,8 @@ body {
   transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .progress-bar {
-    background-color: #374151;
-  }
+.dark .progress-bar {
+  background-color: #374151;
 }
 
 /* Drag and Drop */
@@ -388,11 +373,11 @@ body {
   border-color: #60a5fa;
 }
 
-@media (prefers-color-scheme: dark) {
+.dark {
   .drop-zone {
     border-color: #4b5563;
   }
-  
+
   .drop-zone-active {
     background-color: rgba(59, 130, 246, 0.1);
   }
@@ -412,7 +397,7 @@ body {
   background-color: #f9fafb;
 }
 
-@media (prefers-color-scheme: dark) {
+.dark {
   .table-row {
     border-color: #374151;
   }
@@ -451,8 +436,6 @@ body {
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .gallery-card {
+.dark .gallery-card {
     background-color: #1e293b;
-  }
 }
