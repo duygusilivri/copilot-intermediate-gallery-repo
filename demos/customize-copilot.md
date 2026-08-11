@@ -7,7 +7,7 @@ By the end of this demo, you will:
 - [ ] Know how to monitor your premium request usage
 - [ ] Switch between AI models in Chat and Code completions (OPTIONAL)
 - [ ] Use prompt files for consistent AI interactions
-- [ ] Utilize Chat modes for various development tasks
+- [ ] Utilize custom agent modes for various development tasks
 - [ ] Set up custom instructions with MCP servers for personalized AI behavior
 
 **Estimated Time:** 25-30 minutes
@@ -37,13 +37,13 @@ View premium request percentage to understand how many requests you have left.
 
 ## 🔄 Step 2: Advanced Model Switching (OPTIONAL)
 
-Mode: edit
+Mode: agent
 
 For this demo, try the same coding task with different models and note the differences.
 
 ### Instructions
 
-1. Update your mode to **edit**
+1. Update your mode to **agent**. Should be the default mode.
 2. Select the model you want to try out
 3. Add the following files to the GitHub Copilot Chat UI as related files. You can do so but selecting `Add Context` and typing in the name of each file. OR close out all tabs, then open these three files. Select `Add Context`, then `Open Editors` to grab all open files in your IDE. Either way will gather the below files.
 ```markdown
@@ -108,9 +108,9 @@ Related files:
 help me create a prompt files for creating unit test generation for the UI components.
 ```
 
-## 🎭 Step 4: Utilize Chat Modes
+## 🎭 Step 4: Utilize Custom Agent Modes
 
-1. Look over the `Plan.chatmode.md` in the `.github/chatmodes` file to see the expected behavior of the mode
+1. Look over the `Plan.agent.md` in the `.github/agents` file to see the expected behavior of the mode
 2. Go to GitHub Copilot Chat
 3. Update mode to "Plan" mode
 4. Add in prompt below and look over the suggestion
@@ -193,7 +193,7 @@ Mark off each item as you complete it:
 - [ ] Explored premium request monitoring and identified usage patterns
 - [ ] Practiced model switching techniques
 - [ ] Used project-specific prompt file
-- [ ] Experimented with different chat modes
+- [ ] Experimented with different custom agent modes
 - [ ] Understood MCP servers or set up custom instruction patterns
 - [ ] Applied customizations to improve your development workflow
 

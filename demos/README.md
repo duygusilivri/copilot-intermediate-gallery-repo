@@ -10,6 +10,7 @@ Start here to explore Copilot’s core features. Learn how to use chat commands,
 **Key Skills:**  
 - Discover available Copilot commands  
 - Get project summaries and code explanations  
+- Plan and implement project improvements
 - Generate and review code completions  
 - Commit changes with Copilot
 
@@ -28,12 +29,12 @@ Dive deeper into professional Copilot tools for teams. Inspect Copilot’s decis
 
 ### 3. Customize Copilot Demo ([customize-copilot.md](customize-copilot.md))
 **Overview:**  
-Learn advanced customization techniques. Monitor premium usage, switch models, use prompt files, experiment with chat modes, and set up custom instructions for your team.  
+Learn advanced customization techniques. Monitor premium usage, switch models, use prompt files, experiment with custom agent modes, and set up custom instructions for your team.  
 **Key Skills:**  
 - Track Copilot premium usage  
 - Switch between AI models  
 - Create and use prompt files  
-- Utilize chat modes, custom instructions, and MCP servers
+- Utilize custom agent modes, custom instructions, and MCP servers
 
 ---
 
@@ -48,9 +49,9 @@ Collaborate in dedicated Copilot Spaces. Create a Space, set goals, add context 
 
 ---
 
-### 5. Coding Agent Demo ([coding-agent.md](coding-agent.md))
+### 5. Cloud Agent Demo ([cloud-agent.md](cloud-agent.md))
 **Overview:**  
-Experience GitHub Copilot as a coding agent to accelerate building and enhancing features in your Photo Gallery & Portfolio application.  
+Experience GitHub Copilot as a cloud agent to accelerate building and enhancing features in your Photo Gallery & Portfolio application.  
 **Key Skills:**  
 - Assign Copilot to GitHub issues  
 - Review Copilot-generated pull requests and session details  

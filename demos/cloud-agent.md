@@ -1,6 +1,6 @@
-# Coding Agent Demo
+# Cloud Agent Demo
 
-Welcome to the GitHub Copilot Coding Agent demo! This hands-on guide will help you experience how GitHub Copilot can accelerate building and enhancing features in your Photo Gallery & Portfolio application.
+Welcome to the GitHub Copilot Cloud Agent demo! This hands-on guide will help you experience how GitHub Copilot can accelerate building and enhancing features in your Photo Gallery & Portfolio application.
 
 ---
 
@@ -42,7 +42,7 @@ Mark each item as you complete it:
 
 ## 🚀 What's Next?
 
-Congratulations! You’ve completed all Coding Agent demos and practiced using GitHub Copilot to build, refactor, and collaborate on real features in your Photo Gallery & Portfolio application.
+Congratulations! You’ve completed all Cloud Agent demos and practiced using GitHub Copilot to build, refactor, and collaborate on real features in your Photo Gallery & Portfolio application.
 
 Keep exploring Copilot’s capabilities, share your learnings with your team, and continue building great things. For advanced tips, check out the official documentation or create your own custom demos.
 
